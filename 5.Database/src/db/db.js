@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 function connectToDB() {
   mongoose
     .connect(
-      "mongodb+srv://exnikhilborge_db_user:aq62BkT1xdDbMhEf@cluster0.iverwh3.mongodb.net/cohort"
+      "mongodb+srv://"
     )
     .then(() => {
       console.log("connected to DB");
@@ -14,3 +14,4 @@ function connectToDB() {
 }
 
 module.exports = connectToDB;
+
