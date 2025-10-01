@@ -1,11 +1,11 @@
-const express = require("express")
+const express = require("express");
+const songRoutes = require("./routes/song.routes");
+const app = express();
 
-const app = express()
+app.use(express.json());
 
-module.exports = app
-
-
-
-
+app.use("/", songRoutes);
 
 
+
+module.exports = app;
