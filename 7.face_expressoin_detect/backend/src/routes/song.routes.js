@@ -17,7 +17,7 @@ router.post("/song", upload.single("audio"), async (req, res) => {
   const song = await songModel.create({
     title: req.body.title,
     artist: req.body.artist,
-    audio: fileData,
+    audio: fileData.url,
     mood: req.body.mood,
   });
   console.log(fileData);
@@ -28,10 +28,12 @@ router.post("/song", upload.single("audio"), async (req, res) => {
 });
 
 router.get("/songs", async (req, res) => {
-  const { mood } = req.query;
+  const mood = req.query.mood;
+
   const songs = await songModel.find({
-    mood,
+    mood: mood,
   });
+  console.log("songs---------------", mood);
   res.status(200).json({ message: "songs fetch successfully", songs });
 });
 module.exports = router;

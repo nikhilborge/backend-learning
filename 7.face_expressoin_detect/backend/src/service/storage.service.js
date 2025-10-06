@@ -12,14 +12,15 @@ function uplodFile(file) {
     imagekit.upload(
       {
         file: file.buffer,
-        fileName: mongoose.Types.ObjectId().toString(),
-        folder: "cohort-audio",
+        fileName: "song",
+        folder: "moody-audio",
       },
       (error, result) => {
         if (error) {
           reject(error);
         } else {
           resolve(result);
+          console.log(result, "result");
         }
       }
     );
