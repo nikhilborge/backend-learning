@@ -1,43 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./moodSongs.css";
 
 const MoodSongs = ({ Songs }) => {
-    const [isplaying, setIsPlaying] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(null);
+    const audioRefs = useRef([]);
 
     const handlePlayPause = (index) => {
-        if (isplaying === index) {
+        // Pause currently playing song
+        if (isPlaying !== null && isPlaying !== index && audioRefs.current[isPlaying]) {
+            audioRefs.current[isPlaying].pause();
+        }
+
+        // Toggle play/pause for clicked song
+        if (isPlaying === index) {
+            audioRefs.current[index].pause();
             setIsPlaying(null);
         } else {
+            audioRefs.current[index].play();
             setIsPlaying(index);
         }
     };
 
     return (
         <div className="mood-songs">
-            <h2>Recommonded Songs</h2>
+            <h2>Recommended Songs</h2>
+
             {Songs.map((song, index) => (
                 <div className="song" key={index}>
                     <div className="title">
                         <h3>{song.title}</h3>
                         <p>{song.artist}</p>
                     </div>
+
                     <div className="play-pause-button">
-                        {
-                            isplaying === index &&
-                            <audio src={song.audio} autoPlay={isplaying === index} controls style={{ display: 'none' }}></audio>
-                        }
-                        <button onClick={() => handlePlayPause}>
-                            {isplaying === index ? (
-                                <i className="ri-play-circle-fill"></i>
+                        <audio
+                            ref={(el) => (audioRefs.current[index] = el)}
+                            src={song.audio}
+                            onEnded={() => setIsPlaying(null)}
+                        />
+                        <button onClick={() => handlePlayPause(index)}>
+                            {isPlaying === index ? (
+                                <i className="ri-pause-circle-fill"></i>
                             ) : (
-                                <i className="ri-pause-line"></i>
+                                <i className="ri-play-circle-fill"></i>
                             )}
                         </button>
-
                     </div>
                 </div>
             ))}
-            Songs
         </div>
     );
 };
