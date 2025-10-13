@@ -4,10 +4,11 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true, //schema level validation
-    require: tru,
+    require: true,
   },
   password: {
     type: String,
+    require: true,
   },
 });
 
