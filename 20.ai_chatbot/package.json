@@ -1,0 +1,19 @@
+{
+  "name": "20.ai_chatbot",
+  "version": "1.0.0",
+  "description": "// ai -> how ai will remember things\r types of ai memory\r short term memory - text based\r long term memory - vector based",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.2",
+    "socket.io": "^4.8.1"
+  }
+}
