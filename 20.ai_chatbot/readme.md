@@ -108,10 +108,6 @@ A **WebSocket** is a **persistent, bidirectional** communication channel between
    });
    ```
 
-```
-
-```
-
 1. **Built-in Events**
 
    - `connection` — when a client connects
@@ -128,10 +124,6 @@ A **WebSocket** is a **persistent, bidirectional** communication channel between
    });
    ```
 
-```
-
-```
-
 📡 MQTT Protocol
 
 MQTT (Message Queuing Telemetry Transport) is another real-time communication protocol similar to WebSocket but optimized for IoT (Internet of Things) and low-bandwidth environments.
@@ -144,6 +136,50 @@ Uses Publish/Subscribe model instead of direct socket connections.
 
 Designed for unreliable networks or small devices (sensors, IoT).
 
+```js
+io = server
+socket = single user
+
+on = event listen karna
+emit = event fire karna
 ```
 
+```js
+import { io } from "socket.io-client";
+const [socket, setSocket] = useState(null);
+const [messages, setMessages] = usestate([]);
+
+const [inputText, setInputText] = useState("");
+
+const handleSendMessage = () => {
+
+};
+const handleInputChange = (e) => {
+  setInputText(e.target.value);
+};
+
+const handleKeyPress = (e) => {
+  if (e.key === "Enter") {
+    handleSendMessage();
+  }
+};
+
+useEffect(()=.{
+  let socketInstance = io("http://localhost:3002")
+  setSocket(socketInstance)
+  socketInstance.on('ai-message-response',(response)=>{
+    const botMessage = {
+      id:Date.now()+1,
+      text:response,
+      timestamp: new Date().toLocateTimeString(),
+      sender:'bot'
+    }
+    setMessages(prevMessages=>[...messages, botmessage])
+  })
+},[])
+
+{message.map((message)=>{
+  <div classname=""></div>
+  <input onChange="handleInputChange">
+})}
 ```
